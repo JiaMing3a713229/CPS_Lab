@@ -37,9 +37,8 @@ const char* payload_humidity = "";
 
 uint64_t p = 29;
 uint64_t q = 31;
-uint64_t g =5652;
 
-Paillier paillier(p, q, g);
+Paillier paillier(p, q);
 
 
 void callback(char* topic, byte* message, unsigned int length){
