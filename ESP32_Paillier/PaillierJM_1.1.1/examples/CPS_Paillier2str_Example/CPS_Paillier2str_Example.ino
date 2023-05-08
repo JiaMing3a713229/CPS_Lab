@@ -1,5 +1,9 @@
 #include "PaillierJM.h"
-Paillier paillier(29,31,5652);
+
+uint64_t p = 29;
+uint64_t q = 31;
+
+Paillier paillier(p, q);
 uint32_t gcd(uint32_t a, uint32_t b){   //gcd(a,b)=> gcd(b,a mod b)
   if(b == 0){
     return a;
@@ -82,8 +86,8 @@ uint64_t DecryptionPaillier(uint64_t hp, uint64_t hq, uint64_t c, uint64_t p, ui
 void setup() {
 
   Serial.begin(115200);
-  uint64_t p = 29;
-  uint64_t q = 31;
+  // uint64_t p = 29;
+  // uint64_t q = 31;
   uint64_t n = p * q;
   uint64_t g = 5652;
   uint16_t m = 0;
@@ -101,13 +105,15 @@ void setup() {
   while(m<256){
     Serial.println("-----------------------------------------------------");
     Serial.printf("原始資料m:%d,", m);
-    uint64_t c = paillier.EncryptionPaillier(m);
-    Serial.printf("密文c1:%d,", c);
+    // uint64_t c = paillier.EncryptionPaillier(m);
+    String c = paillier.EncryptionPaillier2Str(m);
+    Serial.printf("密文c1:%s,", c.c_str());
     vTaskDelay(10 / portTICK_PERIOD_MS);
-    uint64_t De_m  = paillier.DecryptionPaillier(c,p,q);
+    // uint64_t De_m  = paillier.DecryptionPaillier(c,p,q);
+    String De_m = paillier.DecryptionPaillier2str(c , p , q);
     Serial.print("解密後明文:");
-    Serial.print(De_m);
-    Serial.printf(" ,err: %d \r\n", (De_m - m));
+    Serial.println(De_m);
+    // Serial.printf(" ,err: %d \r\n", (De_m - m));
     m++;
     vTaskDelay(1 / portTICK_PERIOD_MS);
     Serial.println("-----------------------------------------------------");
