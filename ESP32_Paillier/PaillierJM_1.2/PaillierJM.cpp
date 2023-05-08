@@ -91,9 +91,11 @@ uint64_t Paillier::DecryptionPaillier(uint64_t c, uint64_t p, uint64_t q){
 }
 
 String Paillier::EncryptionPaillier2Str(uint64_t m){
-  uint64_t r = 23;
+  uint64_t t = (millis() / 100) % (p);
   uint64_t n2 = (n*n);
-  return String(((1 + n*m) * MODEXP(r,n,n2)) % (n2));
+  // uint64_t r = (1 + n*t) % (n);
+  return String(((1 + n*m) * MODEXP(t,n,n2)) % (n2));
+  // return String(r);
 }
 
 String Paillier::DecryptionPaillier2str(String c, uint64_t p, uint64_t q){

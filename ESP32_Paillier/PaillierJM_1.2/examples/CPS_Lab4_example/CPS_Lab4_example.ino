@@ -35,8 +35,8 @@ DeserializationError json_error;
 const char* payload_tmeperature = "";
 const char* payload_humidity = "";
 
-uint64_t p = 29;
-uint64_t q = 31;
+uint64_t p = 67;
+uint64_t q = 71;
 
 Paillier paillier(p, q);
 
@@ -178,9 +178,7 @@ void loop() {
   // Serial.println( "json to string:" ); 
   // Serial.printf("payload_tmeperature:%s, ",payload_tmeperature);
   // Serial.printf("payload_humidity:%s \r\n",payload_humidity);
-  vTaskDelay(1000 / portTICK_PERIOD_MS);
-
-  UpdateOled("Student ID", "N96114093", payload_tmeperature, payload_humidity);
+  UpdateOled("Student ID", "N96114093", String(atoi(payload_tmeperature), HEX), String(atoi(payload_humidity), HEX));
   vTaskDelay(1000 / portTICK_PERIOD_MS);
 
   // int t_cipher = atoi(payload_tmeperature);
