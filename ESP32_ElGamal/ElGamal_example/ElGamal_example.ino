@@ -3,14 +3,6 @@ const uint64_t p = 1549;
 const uint64_t g = 19;
 
 
-uint32_t gcd(uint32_t a, uint32_t b){   //gcd(a,b)=> gcd(b,a mod b)
-  if(b == 0){
-    return a;
-  }
-  uint32_t c = a % b;
-  return gcd(b, c);
-}
-
 uint64_t MODEXP(uint64_t a, uint64_t n, uint64_t m){
   a = a % m;  
   uint64_t r = 1;
