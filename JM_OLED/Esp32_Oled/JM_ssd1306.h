@@ -54,13 +54,13 @@ class JM_ssd1306{
     
     
     public:
-        JM_ssd1306(uint8_t ssd1306_slave_addr);
+        JM_ssd1306(uint8_t ssd1306_slave_addr); 
         void OLED_Init(void);
         esp_err_t OLED_WR_Byte(uint8_t data, uint8_t cmd_);
         void OLED_Set_Pos(uint8_t x, uint8_t y);
         void OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr, uint8_t Char_Size);
-        void OLED_Clear(void);
-        void oled_print(uint8_t start_x, uint8_t start_y, const char* display_data, uint8_t font_size);
+        void Clear(void);
+        void print(uint8_t start_x, uint8_t start_y, const char* display_data, uint8_t font_size);
         void oled_draw_xaxis(uint8_t x, uint8_t y);
         void oled_draw_yaxis(uint8_t x, uint8_t y);
         void oled_draw_icon(uint8_t x, uint8_t y);

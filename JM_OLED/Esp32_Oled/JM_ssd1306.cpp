@@ -319,7 +319,7 @@ void JM_ssd1306::OLED_Set_Pos(uint8_t x, uint8_t y)
 }
 
 
-void JM_ssd1306::OLED_Clear(void){
+void JM_ssd1306::Clear(void){
 
     uint8_t i, n;
     for (i = 0; i < 8; i++)
@@ -360,24 +360,24 @@ void JM_ssd1306::OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr, uint8_t Char_S
     }
 }
 
-void JM_ssd1306::oled_print(uint8_t start_x, uint8_t start_y, const char* display_data, uint8_t font_size){
+void JM_ssd1306::print(uint8_t start_x, uint8_t start_y, const char* display_data, uint8_t font_size){
 
     const char* current_char = display_data; 
     uint8_t draw_x = start_x;
-    uint8_t i = 0;
     while(*(display_data) != '\0'){
 
+        OLED_ShowChar(draw_x, start_y, *(display_data), 0);
+
         if(font_size == FONT_SIZE_F6x8 ){
-            draw_x += i + 6;
+            draw_x += 6;
         }
         else if (font_size == FONT_SIZE_F8X16)
         {
-            draw_x += i + 8;
+            draw_x += 8;
         }
 
-        OLED_ShowChar(draw_x, start_y, *(display_data), 0);
+        
         (display_data)++;
-        i++;
     }
 }
 
@@ -456,6 +456,6 @@ void JM_ssd1306::OLED_Init(void){
     OLED_WR_Byte(SSD1306_SETVCOMDETECT, CMD_MODE);       ///< This command adjusts the VCOMH regulator output.
     OLED_WR_Byte(SSD1306_SETSTARTLINE, CMD_MODE);                        ///< Set Display Start Line 
     OLED_WR_Byte(SSD1306_DISPLAYON, CMD_MODE);                        ///< Display On
-    OLED_Clear();
+    Clear();
 
 }
