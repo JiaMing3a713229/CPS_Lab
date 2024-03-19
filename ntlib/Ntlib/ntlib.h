@@ -2,14 +2,14 @@
 #define _NTLIB_H_
 #include<stdint.h>
 
-struct NT{
-    uint64_t (*powof)(uint64_t b, uint64_t pow, uint64_t mod_size);
-    uint64_t (*gcdof)(uint64_t a, uint64_t b, uint64_t mod_size);
-    uint64_t (*exgcdof)(uint32_t num, uint32_t mod_size);
+struct RSA{
+    struct Params{
+        uint64_t p, q, n, e, d, lambda_n;
+    }params;
+    uint64_t (*Encrypt)(struct RSA *rsa, uint32_t message);
+    uint64_t (*Decrypt)(struct RSA *rsa, uint64_t cipher);
 };
 
-int nt_init(struct NT *self);
-void test(void);
-
+int rsa_init(struct RSA *rsa, uint64_t p, uint64_t q, uint64_t e);
 
 #endif
